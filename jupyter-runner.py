@@ -12,15 +12,15 @@ def main():
 
     data = {'NotebookApp': {'password': str(args.password) }}
 
-    with open('/root/.jupyter/jupyter_notebook_config.json', 'w') as file:
-        json.dump(data, file, indent=2)
+    # with open('/root/.jupyter/jupyter_notebook_config.json', 'w') as file:
+    #     json.dump(data, file, indent=2)
 
     ## Create Folder for user
     os.mkdir(f'{args.username.lower()}')
     os.chdir(f'{args.username.lower()}')
 
     ## Run the application
-    os.system('jupyter notebook --ip=0.0.0.0 --port=8888 --no-browser --allow-root')
+    os.system(f"jupyter notebook --ip=0.0.0.0 --port=8888 --no-browser --allow-root --NotebookApp.token={args.password}")
 
 if __name__ == '__main__':
     main()
